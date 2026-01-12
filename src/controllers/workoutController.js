@@ -1,8 +1,8 @@
-import workoutService from "../services/workoutService"
+import workoutService from "../services/workoutService.js"
 
 function getAllWorkouts(req,res){
     const allWorkouts = workoutService.getAllWorkouts()
-    res.send('Get all workouts')
+    res.send({ status: "OK", data: allWorkouts });
 }
 
 function getOneWorkout(req, res){

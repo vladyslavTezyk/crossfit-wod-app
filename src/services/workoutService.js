@@ -1,5 +1,8 @@
+import Workout from '../database/Workout.js'
+
 function getAllWorkouts(){
-    return;
+    const workouts = Workout.getAllWorkouts()
+    return workouts;
 }
 
 function getOneWorkout(){
