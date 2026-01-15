@@ -9,8 +9,8 @@ router.get("/:workoutId", workoutController.getOneWorkout);
 
 router.post("/", workoutController.createNewWorkout);
 
-router.patch("/:workout", workoutController.updateOneWorkout);
+router.patch("/:workoutId", workoutController.updateOneWorkout);
 
-router.delete("/:workout", workoutController.deleteOneWorkout);
+router.delete("/:workoutId", workoutController.deleteOneWorkout);
 
 export default router;

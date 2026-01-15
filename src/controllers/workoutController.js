@@ -10,7 +10,7 @@ function getOneWorkout(req, res) {
     params: { workoutId },
   } = req;
   if (!workoutId) {
-    retudn;
+    return;
   }
   console.log("id ", workoutId);
   const workout = workoutService.getOneWorkout(workoutId);
@@ -43,8 +43,14 @@ function createNewWorkout(req, res) {
 }
 
 function updateOneWorkout(req, res) {
-  const updatedWorkout = workoutService.updateOneWorkout();
-  res.send("Update an existing workout");
+  const {
+    params: { workoutId },
+    body,
+  } = req;
+  if (!workoutId || workoutId != body.id) {
+    return;
+  }
+  const updatedWorkout = workoutService.updateOneWorkout(workoutId, body);
 }
 
 function deleteOneWorkout(req, res) {

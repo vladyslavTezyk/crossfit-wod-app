@@ -25,8 +25,29 @@ function createNewWorkout(newWorkout) {
   return newWorkout;
 }
 
+function updateOneWorkout(workoutId, changes) {
+  const indexForUpdate = DB.workouts.findIndex(
+    (workout) => workout.id === workoutId
+  );
+
+  if (indexForUpdate === -1) {
+    return;
+  }
+
+  const updatedWorkout = {
+    ...DB.workouts[indexForUpdate],
+    ...changes,
+    updatedAt: new Date(),
+  };
+
+  DB.workouts[indexForUpdate] = updatedWorkout;
+  saveToDatabase(DB);
+  return updatedWorkout;
+}
+
 export default {
   getAllWorkouts,
   getOneWorkout,
   createNewWorkout,
+  updateOneWorkout,
 };
