@@ -1,34 +1,54 @@
-import workoutService from "../services/workoutService.js"
+import workoutService from "../services/workoutService.js";
 
-function getAllWorkouts(req,res){
-    const allWorkouts = workoutService.getAllWorkouts()
-    res.send({ status: "OK", data: allWorkouts });
+function getAllWorkouts(req, res) {
+  const allWorkouts = workoutService.getAllWorkouts();
+  res.send({ status: "OK", data: allWorkouts });
 }
 
-function getOneWorkout(req, res){
-    const workout = workoutService.getOneWorkout()
-    res.send(`Get an existing workout ${req.params.workoutId}`)
+function getOneWorkout(req, res) {
+  const workout = workoutService.getOneWorkout();
+  res.send(`Get an existing workout ${req.params.workoutId}`);
 }
 
-function createNewWorkout(req, res){
-    const createdWorkout = workoutService.createNewWorkout()
-    res.send('Create a new workout')
+function createNewWorkout(req, res) {
+  const { body } = req;
+  // TODO : add validation middleware : express-validator or other (it is not the role of contoller to validate the input data)
+  if (
+    !body.name ||
+    !body.mode ||
+    !body.equipment ||
+    !body.exercises ||
+    !body.trainerTips
+  ) {
+    return;
+  }
+
+  const newWorkout = {
+    name: body.name,
+    mode: body.mode,
+    equipment: body.equipment,
+    exercises: body.exercises,
+    trainerTips: body.trainerTips,
+  };
+
+  const createdWorkout = workoutService.createNewWorkout(newWorkout);
+  res.status(201).send({ status: "OK", data: createdWorkout });
 }
 
-function updateOneWorkout(req, res){
-    const updatedWorkout = workoutService.updateOneWorkout()
-    res.send('Update an existing workout')
+function updateOneWorkout(req, res) {
+  const updatedWorkout = workoutService.updateOneWorkout();
+  res.send("Update an existing workout");
 }
 
-function deleteOneWorkout(req, res){
-    const deletedWorkout = workoutService.deleteOneWorkout()
-    res.send('Delete an existing workout')
+function deleteOneWorkout(req, res) {
+  const deletedWorkout = workoutService.deleteOneWorkout();
+  res.send("Delete an existing workout");
 }
 
 export default {
-    getAllWorkouts,
-    getOneWorkout,
-    createNewWorkout,
-    updateOneWorkout,
-    deleteOneWorkout
-}
+  getAllWorkouts,
+  getOneWorkout,
+  createNewWorkout,
+  updateOneWorkout,
+  deleteOneWorkout,
+};
