@@ -6,8 +6,9 @@ function getAllWorkouts() {
   return workouts;
 }
 
-function getOneWorkout() {
-  return;
+function getOneWorkout(id) {
+  const workout = Workout.getOneWorkout(id);
+  return workout;
 }
 
 function createNewWorkout(newWorkout) {
