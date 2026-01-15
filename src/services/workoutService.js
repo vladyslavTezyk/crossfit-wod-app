@@ -29,11 +29,13 @@ function createNewWorkout(newWorkout) {
 
 function updateOneWorkout(workoutId, changes) {
   const updatedWorkout = Workout.updateOneWorkout(workoutId, changes);
+  //   console.log("updatedWorkout ", updatedWorkout);
   return updatedWorkout;
 }
 
-function deleteOneWorkout() {
-  return;
+function deleteOneWorkout(workoutId) {
+  const deletedWorkout = Workout.deleteOneWorkout(workoutId);
+  return deletedWorkout;
 }
 
 export default {

@@ -31,6 +31,7 @@ function updateOneWorkout(workoutId, changes) {
   );
 
   if (indexForUpdate === -1) {
+    console.log("indexForUpdate ", indexForUpdate);
     return;
   }
 
@@ -40,9 +41,25 @@ function updateOneWorkout(workoutId, changes) {
     updatedAt: new Date(),
   };
 
+  console.log("updatedWorkout DAL", updatedWorkout);
+
   DB.workouts[indexForUpdate] = updatedWorkout;
   saveToDatabase(DB);
   return updatedWorkout;
+}
+
+function deleteOneWorkout(workoutId) {
+  const indexForDelete = DB.workouts.findIndex(
+    (workout) => workout.id === workoutId
+  );
+
+  if (indexForDelete === -1) {
+    return;
+  }
+
+  DB.workouts.splice(indexForDelete, 1);
+  saveToDatabase(DB);
+  return workoutId;
 }
 
 export default {
@@ -50,4 +67,5 @@ export default {
   getOneWorkout,
   createNewWorkout,
   updateOneWorkout,
+  deleteOneWorkout,
 };

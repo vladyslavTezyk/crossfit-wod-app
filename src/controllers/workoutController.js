@@ -50,12 +50,22 @@ function updateOneWorkout(req, res) {
   if (!workoutId || workoutId != body.id) {
     return;
   }
+  console.log("updatedWorkout ", workoutId, body);
+
   const updatedWorkout = workoutService.updateOneWorkout(workoutId, body);
+  console.log("updatedWorkout ", updatedWorkout);
+  res.status(200).send({ status: "OK", data: updatedWorkout });
 }
 
 function deleteOneWorkout(req, res) {
-  const deletedWorkout = workoutService.deleteOneWorkout();
-  res.send("Delete an existing workout");
+  const {
+    params: { workoutId },
+  } = req;
+  if (!workoutId) {
+    return;
+  }
+  const deletedWorkout = workoutService.deleteOneWorkout(workoutId);
+  res.status(204).send();
 }
 
 export default {
