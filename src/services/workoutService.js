@@ -29,7 +29,6 @@ function createNewWorkout(newWorkout) {
 
 function updateOneWorkout(workoutId, changes) {
   const updatedWorkout = Workout.updateOneWorkout(workoutId, changes);
-  //   console.log("updatedWorkout ", updatedWorkout);
   return updatedWorkout;
 }
 

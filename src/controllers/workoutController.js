@@ -50,10 +50,8 @@ function updateOneWorkout(req, res) {
   if (!workoutId || workoutId != body.id) {
     return;
   }
-  console.log("updatedWorkout ", workoutId, body);
 
   const updatedWorkout = workoutService.updateOneWorkout(workoutId, body);
-  console.log("updatedWorkout ", updatedWorkout);
   res.status(200).send({ status: "OK", data: updatedWorkout });
 }
 
@@ -64,7 +62,7 @@ function deleteOneWorkout(req, res) {
   if (!workoutId) {
     return;
   }
-  const deletedWorkout = workoutService.deleteOneWorkout(workoutId);
+  workoutService.deleteOneWorkout(workoutId);
   res.status(204).send();
 }
 
