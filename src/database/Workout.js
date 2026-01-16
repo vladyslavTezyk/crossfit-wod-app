@@ -1,8 +1,14 @@
 import DB from "./db.json" with { type: "json" };
 import { saveToDatabase } from "./utils.js";
 
-function getAllWorkouts() {
+function getAllWorkouts(filterParams) {
   try {
+    let workouts = DB.workouts;
+    if (filterParams.mode) {
+      return workouts.filter((workout) =>
+        workout.mode.toLocaleLowerCase().includes(filterParams.mode)
+      );
+    }
     return DB.workouts;
   } catch (error) {
     throw { status: 500, message: error };

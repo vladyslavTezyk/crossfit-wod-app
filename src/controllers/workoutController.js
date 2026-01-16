@@ -1,8 +1,9 @@
 import workoutService from "../services/workoutService.js";
 
 function getAllWorkouts(req, res) {
+  const { mode } = req.query;
   try {
-    const allWorkouts = workoutService.getAllWorkouts();
+    const allWorkouts = workoutService.getAllWorkouts({ mode });
     res.send({ status: "OK", data: allWorkouts });
   } catch (error) {
     res.status(error?.message || 500).send({
@@ -13,9 +14,7 @@ function getAllWorkouts(req, res) {
 }
 
 function getOneWorkout(req, res) {
-  const {
-    params: { workoutId },
-  } = req;
+  const { workoutId } = req.params;
   if (!workoutId) {
     res.status(400).send({
       status: "FAILED",
@@ -92,9 +91,7 @@ function updateOneWorkout(req, res) {
 }
 
 function deleteOneWorkout(req, res) {
-  const {
-    params: { workoutId },
-  } = req;
+  const { workoutId } = req.params;
   if (!workoutId) {
     res.status(400).send({
       status: "FAILED",

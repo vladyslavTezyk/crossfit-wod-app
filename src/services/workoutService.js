@@ -1,9 +1,9 @@
 import { v4 } from "uuid";
 import Workout from "../database/Workout.js";
 
-function getAllWorkouts() {
+function getAllWorkouts(filterParams) {
   try {
-    const workouts = Workout.getAllWorkouts();
+    const workouts = Workout.getAllWorkouts(filterParams);
     return workouts;
   } catch (error) {
     throw error;
